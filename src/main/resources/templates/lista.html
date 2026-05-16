@@ -16,14 +16,11 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 40px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .container {
-            max-width: 600px;
-            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
@@ -37,45 +34,19 @@
 
         h1 {
             color: #667eea;
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
         }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        label{
-            color: #f44336;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        input::placeholder {
-            color: #bbb;
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
         }
 
         .btn {
-            flex: 1;
-            padding: 14px 30px;
+            padding: 12px 30px;
             border: none;
             border-radius: 8px;
             font-size: 1rem;
@@ -83,7 +54,6 @@
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            text-align: center;
             transition: all 0.3s ease;
         }
 
@@ -98,24 +68,128 @@
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
         }
 
-        .info-box p {
-            color: #667eea;
-            font-size: 0.95rem;
-            margin: 0;
+        .btn-edit {
+            background: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-edit:hover {
+            background: #45a049;
+        }
+
+        .btn-delete {
+            background: #f44336;
+            color: white;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-delete:hover {
+            background: #da190b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        tbody tr:hover {
+            background: #f8f9ff;
+            transition: background 0.3s ease;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .actions-cell {
+            display: flex;
+            gap: 10px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .empty-state h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+        }
+
+        .count-badge {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
             font-weight: 600;
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 30px 20px;
+                padding: 20px;
             }
 
             h1 {
-                font-size: 1.5rem;
+                font-size: 2rem;
             }
 
-            .btn {
-                width: 100%;
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+
+            .actions {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+
+            .actions-cell {
+                flex-direction: column;
             }
         }
     </style>
@@ -131,7 +205,7 @@
             <h2>Lista de Gamers</h2>
             <span class="count-badge" th:text="${usuarios.size()} + ' cadastrada(s)'">0 Cadastrada(s)</span>
         </div>
-        <a th:href="@{/novo}" class="btn btn-primary">Adicionar Gamers</a>
+        <a th:href="@{/usuarios/novo}" class="btn btn-primary">Adicionar Gamers</a>
         <div>
             <div th:if="${usuarios != null and !usuarios.isEmpty()}">
                 <table>
@@ -153,8 +227,8 @@
                             <td th:text="${usuario.nivel}"></td>
                          <td>
                             <div class="actions-cell">
-                            <a th:href="@{/editar/{id}(id=${usuario.id})}" class="btn btn-edit">Editar</a>
-                             <a th:href="@{/excluir/{id}(id=${usuario.id})}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir esse gamer?')">Excluir</a>
+                            <a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}" class="btn btn-edit">Editar</a>
+                             <a th:href="@{/usuarios/excluir/{id}(id=${usuario.id})}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir esse gamer?')">Excluir</a>
                             </div>
                          </td>
                      </tr>

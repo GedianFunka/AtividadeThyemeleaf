@@ -173,10 +173,10 @@
     </header>
 
     <div class="info-box" th:if="${usuario.id != null}">
-        <p>💡 Você está editando: <strong th:text="${usuario.nickname}">Nickmane</strong></p>
+        <p>💡 Você está editando: <strong th:text="${usuario.nickname}">Nickname</strong></p>
     </div>
 
-    <form th:action="@{/salvar}" th:object="${usuario}" method="post">
+    <form th:action="@{/usuarios/salvar}" th:object="${usuario}" method="post">
         <input type="hidden" th:field="*{id}">
 
         <div class="form-group">
