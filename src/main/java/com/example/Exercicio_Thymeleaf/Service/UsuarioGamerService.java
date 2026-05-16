@@ -15,7 +15,7 @@ public class UsuarioGamerService {
     private final UsuarioGamerRepository repository;
 
     public List <UsuarioGamer> listar(){
-        repository.findAll();
+        return repository.findAll();
     }
 
     public UsuarioGamer BuscarporId(Long id){
@@ -36,7 +36,6 @@ public class UsuarioGamerService {
     }
 
     public void excluir(Long id){
-        repository.deleteAllById(id);
+        repository.deleteById(id);
     }
-
 }

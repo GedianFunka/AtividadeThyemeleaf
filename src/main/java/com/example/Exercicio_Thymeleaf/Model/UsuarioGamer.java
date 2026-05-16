@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@GeneratedValue
 @Table(name = "usuarios")
 
 public class UsuarioGamer {

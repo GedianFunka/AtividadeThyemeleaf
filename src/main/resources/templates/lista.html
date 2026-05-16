@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário dos Gamers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        label{
+            color: #f44336;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        input::placeholder {
+            color: #bbb;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .info-box p {
+            color: #667eea;
+            font-size: 0.95rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cadastro dos Gamers</h1>
+            <p>Gerenciamento de gamers</p>
+        </header>
+    <div class="actions">
+        <div>
+            <h2>Lista de Gamers</h2>
+            <span class="count-badge" th:text="${usuarios.size()} + ' cadastrada(s)'">0 Cadastrada(s)</span>
+        </div>
+        <a th:href="@{/novo}" class="btn btn-primary">Adicionar Gamers</a>
+        <div>
+            <div th:if="${usuarios != null and !usuarios.isEmpty()}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nickname</th>
+                            <th>Email</th>
+                            <th>Jogo favorito</th>
+                            <th>Nível</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr th:each="usuario : ${usuarios}">
+                            <td th:text="${usuario.id}"></td>
+                            <td th:text="${usuario.nickname}"></td>
+                            <td th:text="${usuario.email}"></td>
+                            <td th:text="${usuario.jogoFavorito}"></td>
+                            <td th:text="${usuario.nivel}"></td>
+                         <td>
+                            <div class="actions-cell">
+                            <a th:href="@{/editar/{id}(id=${usuario.id})}" class="btn btn-edit">Editar</a>
+                             <a th:href="@{/excluir/{id}(id=${usuario.id})}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir esse gamer?')">Excluir</a>
+                            </div>
+                         </td>
+                     </tr>
+                </tbody>
+                </table>
+            </div>
+            <div th:if="${usuarios == null or usuarios.isEmpty()}" class="empty-state">
+                <h2>Nenhum gamer cadastrado ainda</h2>
+                    <p>Clique me 'Adicionar Gamers' para cadastrar o primeiro!</p>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
