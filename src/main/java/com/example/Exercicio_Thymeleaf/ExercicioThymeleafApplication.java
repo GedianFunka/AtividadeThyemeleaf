@@ -10,5 +10,5 @@ public class ExercicioThymeleafApplication {
 		SpringApplication.run(ExercicioThymeleafApplication.class, args);
 	}
 
-	//Gedian gabriel f
+
 }
