@@ -4,7 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Gamers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --black:   #0a0a0f;
+            --deep:    #12101a;
+            --purple:  #7c3aed;
+            --purple-mid: #9d5cf6;
+            --purple-light: #c4b5fd;
+            --white:   #f5f3ff;
+            --gray:    #6b7280;
+            --border:  #2a2040;
+            --glass:   rgba(124, 58, 237, 0.08);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,22 +25,47 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #520087 0%, #725296 100%);
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--black);
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124,58,237,0.25) 0%, transparent 70%),
+                repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(124,58,237,0.04) 39px, rgba(124,58,237,0.04) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(124,58,237,0.04) 39px, rgba(124,58,237,0.04) 40px);
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 60px 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--white);
         }
 
         .container {
-            max-width: 600px;
+            max-width: 560px;
             width: 100%;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
+            background: var(--deep);
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            padding: 48px 44px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--purple), var(--purple-mid), transparent);
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            top: -80px; right: -80px;
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         header {
@@ -35,129 +73,141 @@
             margin-bottom: 40px;
         }
 
+        .form-icon {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 0 12px rgba(124,58,237,0.6));
+        }
+
         h1 {
-            color: #520087;
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-family: 'Space Mono', monospace;
+            color: var(--white);
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
         }
 
         .subtitle {
-            color: #666;
-            font-size: 1rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .info-box {
+            background: var(--glass);
+            border: 1px solid rgba(124,58,237,0.3);
+            border-left: 3px solid var(--purple);
+            padding: 14px 18px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+
+        .info-box p {
+            color: var(--purple-light);
+            font-size: 0.9rem;
+            margin: 0;
+            font-weight: 400;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 22px;
         }
 
         label {
             display: block;
             margin-bottom: 8px;
-            color: #333;
+            color: var(--white);
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
         }
 
         label .required {
-            color: #f44336;
+            color: var(--purple-mid);
+            margin-left: 3px;
         }
 
         input {
             width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 13px 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
         }
 
         input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: var(--purple);
+            background: rgba(124,58,237,0.07);
+            box-shadow: 0 0 0 3px rgba(124,58,237,0.15);
         }
 
         input::placeholder {
-            color: #bbb;
+            color: rgba(255,255,255,0.2);
+            font-weight: 300;
         }
+
+        /* Remove number arrows */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+        input[type=number] { -moz-appearance: textfield; }
 
         .btn-group {
             display: flex;
-            gap: 15px;
-            margin-top: 30px;
+            gap: 12px;
+            margin-top: 32px;
         }
 
         .btn {
             flex: 1;
-            padding: 14px 30px;
+            padding: 14px 24px;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
+            border-radius: 4px;
+            font-size: 0.92rem;
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
             text-align: center;
-            transition: all 0.3s ease;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s ease;
+            letter-spacing: 0.3px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            background: var(--purple);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(124,58,237,0.35);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            background: var(--purple-mid);
+            box-shadow: 0 0 30px rgba(124,58,237,0.55);
+            transform: translateY(-1px);
         }
 
         .btn-secondary {
-            background: #f0f0f0;
-            color: #666;
+            background: transparent;
+            color: var(--gray);
+            border: 1px solid var(--border);
         }
 
         .btn-secondary:hover {
-            background: #e0e0e0;
+            border-color: rgba(255,255,255,0.2);
+            color: var(--white);
+            background: rgba(255,255,255,0.04);
         }
 
-        .info-box {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            border-left: 4px solid #667eea;
-            padding: 15px;
-            margin-bottom: 25px;
-            border-radius: 8px;
-        }
-
-        .info-box p {
-            color: #667eea;
-            font-size: 0.95rem;
-            margin: 0;
-            font-weight: 600;
-        }
-
-        .form-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px 20px;
-            }
-
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            .btn-group {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
+        @media (max-width: 600px) {
+            .container { padding: 36px 24px; }
+            h1 { font-size: 1.3rem; }
+            .btn-group { flex-direction: column; }
         }
     </style>
 </head>
@@ -165,7 +215,7 @@
 <div class="container">
     <header>
         <div class="form-icon">
-            <span th:if="${usuario.id == null}">➕</span>
+            <span th:if="${usuario.id == null}">➕ 🧑‍💻</span>
             <span th:if="${usuario.id != null}">✏️</span>
         </div>
         <h1 th:text="${usuario.id != null} ? 'Editar o Gamer' : 'Novo Gamer'">Novo Gamer</h1>
@@ -209,25 +259,25 @@
                 Jogo favorito <span class="required">*</span>
             </label>
             <input type="text"
-            th:field="*{jogoFavorito}"
-            id="jogo favorito"
-            placeholder="Digite seu Jogo favorito"
-            min="0"
-            max="150"
-            required>
+                   th:field="*{jogoFavorito}"
+                   id="jogo favorito"
+                   placeholder="Digite seu Jogo favorito"
+                   min="0"
+                   max="150"
+                   required>
 
         </div>
 
         <div class="form-group">
             <label for="nivel"> Nivel <span class="required">*</span>
             </label>
-                <input type="number"
-                th:field="*{nivel}"
-                id="nivel"
-                placeholder="Digite seu nivel"
-                min="0"
-                max="150"
-                required>
+            <input type="number"
+                   th:field="*{nivel}"
+                   id="nivel"
+                   placeholder="Digite seu nivel"
+                   min="0"
+                   max="150"
+                   required>
 
         </div>
 
@@ -235,7 +285,7 @@
             <button type="submit" class="btn btn-primary">
                 <span th:text="${usuario.id != null} ? '💾 Atualizar' : '💾 Salvar'">💾 Salvar</span>
             </button>
-            <a th:href="@{/}" class="btn btn-secondary">❌ Cancelar</a>
+            <a th:href="@{/usuarios/}" class="btn btn-secondary">❌ Cancelar</a>
         </div>
     </form>
 </div>

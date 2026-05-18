@@ -4,124 +4,207 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário dos Gamers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --black:        #0a0a0f;
+            --deep:         #12101a;
+            --panel:        #16131f;
+            --purple:       #7c3aed;
+            --purple-mid:   #9d5cf6;
+            --purple-light: #c4b5fd;
+            --white:        #f5f3ff;
+            --muted:        #a0a0b0;
+            --gray:         #6b7280;
+            --border:       #2a2040;
+            --row-hover:    rgba(124,58,237,0.06);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--black);
+            background-image:
+                radial-gradient(ellipse 60% 40% at 50% 0%, rgba(124,58,237,0.2) 0%, transparent 65%),
+                repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(124,58,237,0.035) 39px, rgba(124,58,237,0.035) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(124,58,237,0.035) 39px, rgba(124,58,237,0.035) 40px);
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 60px 24px;
+            color: var(--white);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
+            background: var(--deep);
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            padding: 48px 44px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--purple), var(--purple-mid), transparent);
         }
 
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 48px;
         }
 
         h1 {
-            color: #667eea;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-family: 'Space Mono', monospace;
+            color: var(--white);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
         }
 
+        header p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* ── top bar ── */
         .actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
+        .actions h2 {
+            font-family: 'Space Mono', monospace;
             font-size: 1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .count-badge {
+            background: rgba(124,58,237,0.2);
+            color: var(--purple-light);
+            border: 1px solid rgba(124,58,237,0.35);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── buttons ── */
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: 0.3px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            background: var(--purple);
+            color: #fff;
+            box-shadow: 0 0 18px rgba(124,58,237,0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            background: var(--purple-mid);
+            box-shadow: 0 0 28px rgba(124,58,237,0.5);
+            transform: translateY(-1px);
         }
 
         .btn-edit {
-            background: #4CAF50;
-            color: white;
-            padding: 8px 16px;
-            font-size: 0.9rem;
+            background: rgba(74,222,128,0.12);
+            color: #4ade80;
+            border: 1px solid rgba(74,222,128,0.25);
+            padding: 7px 16px;
+            font-size: 0.82rem;
         }
 
         .btn-edit:hover {
-            background: #45a049;
+            background: rgba(74,222,128,0.22);
+            border-color: rgba(74,222,128,0.5);
         }
 
         .btn-delete {
-            background: #f44336;
-            color: white;
-            padding: 8px 16px;
-            font-size: 0.9rem;
+            background: rgba(239,68,68,0.12);
+            color: #f87171;
+            border: 1px solid rgba(239,68,68,0.25);
+            padding: 7px 16px;
+            font-size: 0.82rem;
         }
 
         .btn-delete:hover {
-            background: #da190b;
+            background: rgba(239,68,68,0.22);
+            border-color: rgba(239,68,68,0.5);
         }
 
+        /* ── table ── */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-            border-radius: 10px;
+            background: var(--panel);
+            border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
         }
 
         thead {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: rgba(124,58,237,0.15);
+            border-bottom: 1px solid var(--border);
         }
 
         th {
-            padding: 15px;
+            padding: 14px 18px;
             text-align: left;
-            font-weight: 600;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--purple-light);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
+            letter-spacing: 1.5px;
         }
 
         td {
-            padding: 15px;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 15px 18px;
+            border-bottom: 1px solid rgba(42,32,64,0.6);
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+
+        td:first-child {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.78rem;
+            color: rgba(124,58,237,0.7);
+        }
+
+        td:nth-child(2) {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        tbody tr {
+            transition: background 0.15s ease;
         }
 
         tbody tr:hover {
-            background: #f8f9ff;
-            transition: background 0.3s ease;
+            background: var(--row-hover);
         }
 
         tr:last-child td {
@@ -130,117 +213,91 @@
 
         .actions-cell {
             display: flex;
-            gap: 10px;
+            gap: 8px;
+            align-items: center;
         }
 
+        /* ── empty state ── */
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
-            color: #999;
+            padding: 80px 20px;
+            color: var(--gray);
         }
 
         .empty-state svg {
-            width: 100px;
-            height: 100px;
+            width: 80px; height: 80px;
             margin-bottom: 20px;
-            opacity: 0.3;
+            opacity: 0.2;
         }
 
         .empty-state h2 {
-            font-size: 1.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
             margin-bottom: 10px;
-            color: #666;
+            color: var(--muted);
         }
 
         .empty-state p {
-            font-size: 1.1rem;
-        }
-
-        .count-badge {
-            background: #667eea;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--gray);
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            table {
-                font-size: 0.9rem;
-            }
-
-            th, td {
-                padding: 10px;
-            }
-
-            .actions {
-                flex-direction: column;
-                gap: 15px;
-                align-items: stretch;
-            }
-
-            .actions-cell {
-                flex-direction: column;
-            }
+            .container { padding: 28px 18px; }
+            h1 { font-size: 1.4rem; }
+            th, td { padding: 11px 12px; }
+            .actions { flex-direction: column; align-items: flex-start; }
+            .actions-cell { flex-direction: column; gap: 6px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Cadastro dos Gamers</h1>
-            <p>Gerenciamento de gamers</p>
-        </header>
+<div class="container">
+    <header>
+        <h1>Cadastro dos Gamers 🎮</h1>
+        <p>Gerenciamento de gamers</p>
+    </header>
     <div class="actions">
         <div>
             <h2>Lista de Gamers</h2>
-            <span class="count-badge" th:text="${usuarios.size()} + ' cadastrada(s)'">0 Cadastrada(s)</span>
+            <span class="count-badge" th:text="${usuarios.size()} + ' cadastrada(s)'">0 Cadastrados(as)</span>
         </div>
         <a th:href="@{/usuarios/novo}" class="btn btn-primary">Adicionar Gamers</a>
         <div>
             <div th:if="${usuarios != null and !usuarios.isEmpty()}">
                 <table>
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nickname</th>
-                            <th>Email</th>
-                            <th>Jogo favorito</th>
-                            <th>Nível</th>
-                        </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nickname</th>
+                        <th>Email</th>
+                        <th>Jogo favorito</th>
+                        <th>Nível</th>
+                    </tr>
                     </thead>
                     <tbody>
-                     <tr th:each="usuario : ${usuarios}">
-                            <td th:text="${usuario.id}"></td>
-                            <td th:text="${usuario.nickname}"></td>
-                            <td th:text="${usuario.email}"></td>
-                            <td th:text="${usuario.jogoFavorito}"></td>
-                            <td th:text="${usuario.nivel}"></td>
-                         <td>
+                    <tr th:each="usuario : ${usuarios}">
+                        <td th:text="${usuario.id}"></td>
+                        <td th:text="${usuario.nickname}"></td>
+                        <td th:text="${usuario.email}"></td>
+                        <td th:text="${usuario.jogoFavorito}"></td>
+                        <td th:text="${usuario.nivel}"></td>
+                        <td>
                             <div class="actions-cell">
-                            <a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}" class="btn btn-edit">Editar</a>
-                             <a th:href="@{/usuarios/excluir/{id}(id=${usuario.id})}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir esse gamer?')">Excluir</a>
+                                <a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}" class="btn btn-edit">Editar</a>
+                                <a th:href="@{/usuarios/excluir/{id}(id=${usuario.id})}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir esse gamer?')">Excluir</a>
                             </div>
-                         </td>
-                     </tr>
-                </tbody>
+                        </td>
+                    </tr>
+                    </tbody>
                 </table>
             </div>
             <div th:if="${usuarios == null or usuarios.isEmpty()}" class="empty-state">
                 <h2>Nenhum gamer cadastrado ainda</h2>
-                    <p>Clique me 'Adicionar Gamers' para cadastrar o primeiro!</p>
+                <p>Clique me 'Adicionar Gamers' para cadastrar o primeiro!</p>
             </div>
         </div>
     </div>
-    </div>
+</div>
 </body>
 </html>
